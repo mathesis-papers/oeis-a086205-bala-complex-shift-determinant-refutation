@@ -1,0 +1,11 @@
+{
+  "schema": "mathesis.materials.v1",
+  "work": "oeis-a086205-bala-complex-shift-determinant-refutation",
+  "version": 2,
+  "repository_url": "https://github.com/mathesis-papers/oeis-a086205-bala-complex-shift-determinant-refutation",
+  "site_url": "https://papers.trureturing.org/oeis-a086205-bala-complex-shift-determinant-refutation/",
+  "doi": null,
+  "reading": {},
+  "slides": [],
+  "visualizations": []
+}

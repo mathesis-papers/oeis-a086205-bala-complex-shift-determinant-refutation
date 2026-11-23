@@ -1,0 +1,426 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,booktabs,tabularx,longtable,array}
+\usepackage[margin=1in]{geometry}
+\usepackage[breaklinks=true,colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\C}{\mathbb C}
+\title{Complex-shift correction at OEIS A086205 (revision 35),\\Bala's formula block of 19 February 2023:\\an extension of Krattenthaler (1999)}
+\author{Haobo Ma\\\small ChronoAI Pte Ltd, Singapore\and Wenlin Zhang\\\small National University of Singapore\\\small ChronoAI Pte Ltd, Singapore}
+\date{7 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+At OEIS A086205 (revision 35), Bala's formula block of 19 February 2023, we correct the
+complex-shift conjecture by extending Krattenthaler's (1999) polynomial
+Vandermonde evaluation: the determinant changes from $1$ to $2$ at size one
+and shift one. The corrected formula is
+$\det_{1\le i,j\le n}\binom{i^2+z}{j}=a(n)\prod_{i=1}^n(1+z/i^2)$
+for every complex $z$. Its normalized limit is an entire hyperbolic-sine
+product. We give alternative proofs of the companion identities, including
+the staircase-tableau count treated by Yutcis (1980), and prove Somos's
+recurrences for all integer indices. In the directly linked A057863, the
+Burchnall--Chaundy leading exponent is corrected using the normalization of
+Veselov and Willox (2014).
+\end{abstract}
+\noindent\small Licensed under Creative Commons Attribution 4.0 International
+(CC BY 4.0).\normalsize
+
+\section{The printed conjecture and its correction}
+The last formula in Bala's block in A086205, revision 35, is labeled
+``Conjecture'' and asserts $a(n)=\det(\binom{i^2+z}{j})$
+``for arbitrary complex $z$''~\cite{oeis}.
+The edit history changes an integer-shift version to the complex-shift wording
+in revision 29 (20 February 2023), within that dated block.
+The defining PARI program uses indices $1,\ldots,n$, in agreement with
+PARI's matrix convention~\cite{pari}. Put
+\[
+ D_n(z)=\det_{1\le i,j\le n}\binom{i^2+z}{j},\qquad a_n=D_n(0),
+ \qquad \binom{w}{j}=\frac{\prod_{r=0}^{j-1}(w-r)}{j!}.
+\]
+Empty determinants and products equal $1$. Thus $D_0(z)=1$,
+whereas $D_1(z)=1+z$. In particular, $D_1(1)=2\ne1=a_1$.
+The following evaluation identifies the missing factor for every size.
+
+\begin{theorem}\label{thm:main}
+For $n\ge0$ and $x_1,\ldots,x_n\in\C$,
+\begin{equation}\label{eq:general}
+ \det_{1\le i,j\le n}\binom{x_i}{j}
+ =\frac{\prod_{i=1}^n x_i}{\prod_{j=1}^n j!}
+   \prod_{1\le i<k\le n}(x_k-x_i).
+\end{equation}
+Consequently, for every $z\in\C$,
+\begin{equation}\label{eq:correction}
+ D_n(z)=a_n\prod_{i=1}^n\left(1+\frac{z}{i^2}\right),\qquad
+ a_n=\frac{\prod_{i=1}^n i^2}{\prod_{j=1}^n j!}
+             \prod_{1\le i<k\le n}(k^2-i^2).
+\end{equation}
+\end{theorem}
+\begin{proof}
+The polynomial $\binom{X}{j}$ factors as $Xq_{j-1}(X)$, where
+$q_{j-1}(X)=\prod_{r=1}^{j-1}(X-r)/j!$ has degree $j-1$ and leading
+coefficient $1/j!$. Factoring $x_i$ from row $i$ leaves the evaluation
+matrix of these polynomials. Its coefficient matrix in the ordered basis
+$1,X,\ldots,X^{n-1}$ is upper triangular with diagonal
+$1/1!,\ldots,1/n!$. Multiplying its determinant by the Vandermonde
+determinant proves~\eqref{eq:general}. This is the polynomial evaluation
+identity of Krattenthaler~\cite[Proposition 1, equation (2.2)]{kratt},
+with the row factors displayed explicitly. The argument is a polynomial
+identity, so zero or coincident $x_i$ cause no exception. Substitution
+$x_i=i^2+z$ makes every difference independent of $z$. Dividing the resulting
+product by its nonzero value at $z=0$ gives~\eqref{eq:correction}.
+\end{proof}
+
+For $n\ge1$, $D_n$ has degree $n$ and simple zeros $-1^2,\ldots,-n^2$.
+Its ratio to $a_n$ is strictly increasing for real $z\ge0$, since all factors
+in~\eqref{eq:correction} are positive and strictly increasing there.
+Thus no restriction to positive real shifts repairs the conjecture.
+There is a related invariant determinant, but its normalization is different:
+\begin{equation}\label{eq:invariant}
+ \det_{1\le i,j\le n}\binom{i^2+z}{j-1}
+ =\frac{\prod_{i<k}(k^2-i^2)}{\prod_{j=0}^{n-1}j!}
+ =\frac{a_n}{n!}.
+\end{equation}
+Indeed, the column degrees are now $0,\ldots,n-1$ with leading coefficients
+$1/j!$; the same coefficient-matrix argument applies without row factors.
+The last equality follows because
+$\prod_{i=1}^n i^2=(n!)^2$ and
+$\prod_{j=1}^n j!=n!\prod_{j=0}^{n-1}j!$.
+Equation~\eqref{eq:invariant} concerns a column-index variant not asserted
+in the source; its equality to $a_n$ fails for $n=2$, when it is $3$ rather
+than $a_2=6$. Its value equals $a_n$ only for $n=0,1$.
+
+\begin{corollary}\label{cor:limit}
+Locally uniformly for $z\in\C$,
+\[
+ \lim_{n\to\infty}\frac{D_n(z)}{a_n}
+ =F(z):=\sum_{r=0}^{\infty}\frac{\pi^{2r}z^r}{(2r+1)!}.
+\]
+For either square root of $z\ne0$, $F(z)=\sinh(\pi\sqrt z)/(\pi\sqrt z)$,
+and $F(0)=1$. On every disk $|z|\le R$, the error is $O_R(1/n)$.
+\end{corollary}
+\begin{proof}
+The series $\sum_i |z|/i^2$ converges uniformly on that disk. The omitted
+tail product $T_n$ satisfies
+$|T_n-1|\le\exp(R\sum_{i>n}i^{-2})-1\le e^{R/n}-1$.
+Also $|D_n(z)/a_n|\le\exp(R\sum_{i\ge1}i^{-2})$.
+Thus the finite products converge locally uniformly with the stated error.
+Euler's product for $\sinh$~\cite[4.36.1]{dlmf} identifies their limit with
+$F$. Its power series also removes the apparent square-root ambiguity.
+\end{proof}
+This analytic consequence is not posed in the OEIS block.
+
+\section{Accompanying formulas and staircase tableaux}
+All four formulas preceding Bala's conjecture follow from the same evaluation.
+The factorial product was recorded before the block; the two recurrences also
+follow from Somos's A057863 identities of 18 January 2023 by the scaling
+in~\eqref{eq:products}. The following arguments give a common derivation.
+For $n\ge1$, cancellation in~\eqref{eq:correction} yields
+\[
+ \frac{a_n}{a_{n-1}}
+ =\frac{n^2}{n!}\prod_{i=1}^{n-1}(n-i)(n+i)
+ =\frac{(2n-1)!}{(n-1)!}.
+\]
+Since $a_0=1$, this proves
+\begin{equation}\label{eq:products}
+ a_n=\prod_{k=1}^n\frac{(2k-1)!}{(k-1)!}
+ =\prod_{k=0}^{n}\frac{(n+k)!}{(2k)!}
+ =2^{n(n-1)/2}\prod_{k=1}^n(2k-1)!!.
+\end{equation}
+For the middle expression $Q_n$, $Q_0=1$ and
+$Q_n/Q_{n-1}=\prod_{k=0}^{n-1}(n+k)=(2n-1)!/(n-1)!$.
+The last equality uses
+$(2k-1)!/(k-1)!=2^{k-1}(2k-1)!!$.
+The last product is A057863~\cite{odd}; these formulas are evaluations of
+the existing source identities, not new sequence definitions.
+
+Writing $r_n=a_{n+1}/a_n=(2n+1)!/n!$ gives
+$r_n/r_{n-1}=4n+2$. For $n\ge1$ this proves
+\begin{align}
+ a_{n+1}a_{n-1}&=(4n+2)a_n^2,\
+ a_n^3a_{n+2}+a_{n-1}a_{n+1}^3
+   &=(8n+8)(a_na_{n+1})^2.\label{eq:quartic}
+\end{align}
+For the second identity, divide by $(a_na_{n+1})^2$; the two terms become
+$r_{n+1}/r_n=4n+6$ and $r_n/r_{n-1}=4n+2$.
+
+For completeness, write $b_n=\prod_{k=1}^n(2k-1)!!$, the defining
+A057863 product. Counting the occurrences of each odd factor gives
+$b_n=\prod_{k=0}^n(2k+1)^{n-k}$. Since
+$b_{n+1}/b_n=(2n+1)!!$, one obtains
+\[
+ b_{n+1}b_{n-1}=(2n+1)b_n^2\quad(n\ge1),
+\]
+and
+\[
+ b_nb_{n+2}^3+b_{n+1}^3b_{n+3}
+ =(4n+8)b_{n+1}^2b_{n+2}^2\quad(n\ge0).
+\]
+Indeed, division of the latter identity by $b_{n+1}^2b_{n+2}^2$
+reduces its left side to $(2n+3)+(2n+5)$. These prove the nonnegative-index
+instances of the recurrences attributed to Somos in A057863 (18 January 2023).
+
+\begin{corollary}\label{cor:integer}
+For $m\ge0$ define $b_{-m-1}=(-1)^{\lfloor(m+1)/2\rfloor}b_m$.
+Then all three identities in Somos's A057863 block hold for every $n\in\mathbb Z$:
+\begin{align*}
+ b_n&=(-1)^{\lfloor(n+1)/2\rfloor}b_{-n-1},\\
+ b_{n+1}b_{n-1}&=(2n+1)b_n^2,\\
+ b_nb_{n+2}^3+b_{n+1}^3b_{n+3}&=(4n+8)b_{n+1}^2b_{n+2}^2.
+\end{align*}
+\end{corollary}
+\begin{proof}
+All terms are nonzero. Reflection is consistent because
+$\lfloor-m/2\rfloor=-\lfloor(m+1)/2\rfloor$.
+For $n=-m-1$, $m\ge1$, the sign in
+$b_{n+1}b_{n-1}/b_n^2$ is negative: the adjacent two floor exponents
+sum to an odd number. Its value is therefore $-(2m+1)=2n+1$.
+The boundary cases $n=-1,0$ use $b_{-2}=-1$, $b_{-1}=b_0=b_1=1$.
+The quartic identity follows by division by $b_{n+1}^2b_{n+2}^2$ and
+addition of the quadratic identities at $n+1$ and $n+2$.
+\end{proof}
+
+The Schur specialization recorded by Bedratyuk and the tableau count mentioned
+by Meeussen in A086205 have a common product proof. Let
+$\delta_n=(n,n-1,\ldots,1)$. The bialternant and tableau formulas for Schur
+polynomials~\cite[equations (1) and (3)]{tamvakis} imply
+\begin{equation}\label{eq:schur}
+ s_{\delta_n}(x_1,\ldots,x_n)
+ =\frac{\det(x_i^{2(n-j)+1})_{i,j=1}^n}
+        {\det(x_i^{n-j})_{i,j=1}^n}
+ =\prod_{i=1}^n x_i\prod_{i<k}(x_i+x_k).
+\end{equation}
+To see the second equality, factor $x_i$ from each numerator row and apply
+the Vandermonde formula to the squares. The quotient simplifies by
+$x_k^2-x_i^2=(x_k-x_i)(x_k+x_i)$. Both sides are polynomials,
+so the equality also holds at coincident variables.
+At $(x_1,\ldots,x_n)=(1,\ldots,n)$, equation~\eqref{eq:correction} and
+$\prod_{i<k}(k-i)=\prod_{j=1}^n(j-1)!$ give
+$a_n=n!\prod_{i<k}(i+k)=s_{\delta_n}(1,2,\ldots,n)$.
+At $(1,\ldots,1)$, equation~\eqref{eq:schur} gives $2^{n(n-1)/2}$.
+The tableau formula identifies this with the number of semistandard tableaux
+of shape $\delta_n$ with entries at most $n$ (weakly increasing rows and
+strictly increasing columns). Thus the count stated as a conjecture in the
+2017 comment follows from the classical Schur identities.
+The staircase-tableau enumeration has an earlier treatment by
+Yutcis~\cite{yutcis} (1980, pp.~423--427), using tournaments.
+Stanley~\cite[Exercise 7.30(b), solution p.~505]{stanley} (1999)
+gives the staircase specialization, and Striker~\cite[Lemma 3.6, p.~820]{striker}
+(2009) gives the displayed Vandermonde proof for shape
+$(n-1,\ldots,1,0)$ in $n$ variables. Multiplication by $\prod_i x_i$
+gives~\eqref{eq:schur}. Thus this is an alternative proof of an older count.
+
+\begin{corollary}\label{cor:hooks}
+For $N=n(n+1)/2$, the hook product of $\delta_n$ is $b_n$ and the number
+of its standard Young tableaux is $N!/b_n$. In the notation of A005118,
+$b_n=N!/\mathrm{A005118}(n+1)$.
+\end{corollary}
+\begin{proof}
+The hook at cell $(i,j)$ has length $2(n-i-j+1)+1$.
+The odd length $2r+1$ occurs $n-r$ times, $0\le r<n$; their product is
+$b_n$. The hook-length formula~\cite[\S1.2, (HLF)]{hooks} gives the tableau
+count. This proves the comment of Deutsch in A057863 (21 May 2004);
+the A005118 indexing is specified in its tableau comment~\cite{standard}.
+\end{proof}
+
+\begin{corollary}\label{cor:barnes}
+Let $G(1)=1$, $G(x+1)=\Gamma(x)G(x)$ be the Barnes $G$-function,
+and let $A$ be the Glaisher--Kinkelin constant. For $n\ge0$,
+\[
+b_n=\frac{\sqrt{G(2n+2)}}{2^{n^2/2}G(n+1)\sqrt{\Gamma(n+1)}}.
+\]
+The equivalent half-integer formula recorded by Reshetnikov (6 November 2015) is
+\[
+ b_n=2^{n(n+1)/2-1/24}A^{3/2}\pi^{-n/2-1/4}e^{-1/8}G(n+3/2).
+\]
+As $n\to\infty$,
+\begin{align*}
+ b_n&\sim\frac{A^{1/2}2^{n^2/2+n+5/24}
+ n^{n^2/2+n/2+1/24}}{\exp(3n^2/4+n/2+1/24)},\\
+ a_n&\sim\frac{A^{1/2}2^{n^2+n/2+5/24}
+ n^{n^2/2+n/2+1/24}}{\exp(3n^2/4+n/2+1/24)}.
+\end{align*}
+These are the Barnes formula and asymptotics recorded by Kotesovec in
+A057863 (8 April 2021; 13 November 2014) and A086205 (11 July 2015).
+\end{corollary}
+\begin{proof}
+Square the proposed Barnes expression. Its ratio at $n$ and $n-1$ is
+\[
+ \frac{(2n)!(2n-1)!}{2^{2n-1}(n-1)!^2 n}=((2n-1)!!)^2.
+\]
+The initial value is 1 and the positive square root gives $b_n$.
+Write $L(t)=\log G(t+1)$. The Barnes expansion and Stirling formula
+give~\cite[5.17.5--5.17.7; 5.11.1]{dlmf}
+\[
+ L(t)=\left(\frac{t^2}{2}-\frac1{12}\right)\log t
+ -\frac{3t^2}{4}+\frac t2\log(2\pi)+\frac1{12}-\log A+O(t^{-2}).
+\]
+Substitution in
+$\log b_n=\tfrac12L(2n+1)-L(n)-\tfrac12\log\Gamma(n+1)
+-\tfrac12n^2\log2$ yields
+\begin{align*}
+ \log b_n={}&\left(\frac{n^2}{2}+\frac n2+\frac1{24}\right)\log n
+ +\left(\frac{n^2}{2}+n+\frac5{24}\right)\log2\\
+ &-\frac{3n^2}{4}-\frac n2-\frac1{24}+\frac12\log A+O(n^{-1}).
+\end{align*}
+Exponentiation proves the first asymptotic. Multiplication by
+$2^{n(n-1)/2}$ proves the second.
+Finally, the duplication formula~\cite[5.5.5]{dlmf} gives
+\[
+ b_n=2^{n(n+1)/2}\pi^{-n/2}\frac{G(n+3/2)}{G(3/2)}.
+\]
+This follows by multiplying
+$(2k-1)!!=2^k\Gamma(k+1/2)/\sqrt\pi$ for $1\le k\le n$.
+Expanding $L(n+1/2)$ as above and comparing constants gives
+\[
+ \log G(3/2)=\frac{\log2}{24}+\frac{\log\pi}{4}
+ +\frac18-\frac32\log A.
+\]
+Substitution proves the stated half-integer formula, including its constant.
+\end{proof}
+
+\begin{corollary}\label{cor:bc}
+For the Burchnall--Chaundy polynomials in the normalization of
+Veselov--Willox~\cite[equation (1)]{vw}, the leading term is
+\[
+ P_n(z)=\frac{z^{n(n+1)/2}}{b_n}+
+ \text{terms of lower degree}\qquad(n\ge0).
+\]
+Somos's A057863 comment of 18 January 2023 asserts
+``leading term $z^{n^2+n}/a(n)$'', where its $a(n)$ is our $b_n$.
+The exponent is replaced by $n(n+1)/2$ in the linked normalization.
+Already $P_1=z+c_1$,
+as displayed by Veselov--Willox (2014), distinguishes the two exponents.
+\end{corollary}
+\begin{proof}
+The cited polynomial family has $P_{-1}=P_0=1$ and
+$P'_{n+1}P_{n-1}-P_{n+1}P'_{n-1}=P_n^2$.
+If $P_n$ and $P_{n-1}$ have the stated degrees and leading coefficients
+$c_n=1/b_n$, $c_{n-1}=1/b_{n-1}$, then
+$(P_{n+1}/P_{n-1})'=(P_n/P_{n-1})^2$
+has leading behavior $(c_n/c_{n-1})^2z^{2n}$ at infinity.
+Integration gives degree $n(n+1)/2+n+1=(n+1)(n+2)/2$ for $P_{n+1}$
+and leading coefficient $c_n^2/((2n+1)c_{n-1})=1/b_{n+1}$.
+An integration constant multiplies $P_{n-1}$ and cannot affect the
+leading term. The case $n=0$, with $P_{-1}=P_0=1$, starts the induction.
+\end{proof}
+
+For the explicitly cross-referenced A266091, its additional product note
+also telescopes~\cite{dasasm}:
+\[
+ \prod_{1\le i\le j\le n}\frac{i+j}{i+j-1}
+ =\prod_{j=1}^n\frac{2j}{j}=2^n.
+\]
+Its main product formula likewise follows by taking the product column by
+column:
+\[
+ \prod_{1\le i\le j\le n}\frac{i+2j}{i+j-1}
+ =\prod_{j=1}^n\frac{(3j)!(j-1)!}{(2j)!(2j-1)!}
+ =\prod_{k=0}^n\frac{(3k)!}{(n+k)!}.
+\]
+For the last step, the denominator factorials in the first product are
+$1!,2!,\ldots,(2n)!$; cancellation of $0!,\ldots,(n-1)!$
+leaves $n!,\ldots,(2n)!$. This is a product identity, distinct from the
+alternating-sign-matrix interpretation. For the latter,
+Behrend, Fischer and Konvalinka~\cite[Corollary 5, equation (34)]{bfk}
+already prove the count for order $2n+1$ (preprint 2015; journal version 2017).
+
+\clearpage
+\section{Coverage and verification}
+{\small\renewcommand{\arraystretch}{1.06}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.45\linewidth}>{\raggedright\arraybackslash}p{.51\linewidth}@{}}
+\toprule
+Source item & Coverage\\\midrule
+\endhead
+A086205, Bala block (19 Feb 2023), final formula; complex wording in rev.~29, retained in rev.~35 & Refuted-and-corrected by Theorem~\ref{thm:main}; counterexample $n=1,z=1$.\\
+General node evaluation & Extension of Krattenthaler (1999), Proposition 1; Theorem~\ref{thm:main}.\\
+Zero-based-column variant and analytic limit & Not posed; proved by~\eqref{eq:invariant} and Corollary~\ref{cor:limit}. The variant is not asserted in the source.\\
+A086205 initial product; Bala's alternative factorial product and A057863 relation & Proved by~\eqref{eq:products}; alternative derivation of recorded formulas.\\
+Same Bala block, two recurrences & Proved by~\eqref{eq:quartic}; already consequences of Somos's A057863 block (18 Jan 2023).\\
+A086205, Bedratyuk (6 Feb 2022), Schur specialization & Reproved; prior specialization Stanley (1999), Exercise 7.30(b), and Striker (2009), Lemma 3.6.\\
+A086205, Meeussen (26 Nov 2017), tableau-count conjecture & Reproved; prior count Yutcis (1980); later Schur proofs Stanley (1999), Striker (2009).\\
+A057863 defining and power products, Bala's A086205 relation & Proved by~\eqref{eq:products} and the $b_n$ factor count.\\
+A057863, Somos (18 Jan 2023), reflection and two recurrences on $\mathbb Z$ & Proved for the specified signed extension; Corollary~\ref{cor:integer}.\\
+A057863, Deutsch (21 May 2004), hook product and A005118 relation & Proved by Corollary~\ref{cor:hooks}; classical hook-length formula cited.\\
+A057863, Kotesovec (8 Apr 2021), Barnes formula; asymptotics in A057863 (13 Nov 2014) and A086205 (11 Jul 2015) & Proved by Corollary~\ref{cor:barnes}, using the classical Barnes expansion.\\
+A057863, Reshetnikov (6 Nov 2015), half-integer Barnes formula & Proved by Corollary~\ref{cor:barnes}, including the normalization constant.\\
+A057863, Somos (18 Jan 2023), Burchnall--Chaundy leading term & Refuted-and-corrected in the linked normalization; prior formula Veselov--Willox (2014), pp.~1, 3; Corollary~\ref{cor:bc}.\\
+A266091, Bala (19 Feb 2023), both finite products & Proved by telescoping; the factorial product was already recorded in 2015.\\
+A266091, odd-order DASASM interpretation & Prior proof cited: Behrend--Fischer--Konvalinka (2015/2017), Corollary 5.\\
+A266091 asymptotic; A057863 coefficient description and Hankel transform & Not covered.\\
+\bottomrule
+\end{longtable}}
+{\small\raggedright The pinned Lean file
+\href{https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean}{\texttt{BalaComplexShiftDeterminantRefutation.lean}}
+defines \texttt{shiftedDet} with one-based indices and generalized binomial
+coefficients; \texttt{claim} is universal shift independence; and
+\texttt{result} proves its negation using $n=1,z=1$.
+These declarations are in the namespace
+\texttt{D5.S0.Certificates.}\allowbreak\texttt{BalaComplexShiftDeterminantRefutation}.
+Both determinant evaluations and the accompanying identities have written
+proofs, as do Corollaries~\ref{cor:limit}--\ref{cor:bc}; the cited matrix
+enumeration is a prior theorem. The accompanying \texttt{verify.py} checks the entire
+determinant polynomials over the rationals for $0\le n\le6$, the listed
+products and recurrences for $0\le n\le12$ where defined, and the
+semistandard and standard staircase-tableau counts by enumeration for
+$0\le n\le5$. It also checks the signed reflection and recurrences for
+$-12\le n\le12$, the hook products through $n=12$, and the
+integer-argument Barnes formula through $n=12$. It checks the
+Burchnall--Chaundy leading coefficients and differential recurrence for the
+monomial solutions through index 12 and the displayed cubic and sextic
+families. These finite checks are separate from the written all-index proofs.\par}
+
+\clearpage
+\begin{thebibliography}{99}
+\bibitem{oeis} OEIS Foundation Inc., A086205, contributed by Benoit Cloitre
+(2003); formula block by Peter Bala (19 February 2023), revision 35
+(21 February 2023). \url{https://oeis.org/A086205/internal}.
+\bibitem{kratt} C. Krattenthaler, \emph{Advanced determinant calculus},
+S\'eminaire Lotharingien de Combinatoire \textbf{42} (1999), B42q,
+Proposition 1, equation (2.2), p.~5.
+\url{https://arxiv.org/abs/math/9902004v3}.
+\bibitem{pari} The PARI Group, \emph{PARI/GP documentation},
+\texttt{matrix} and \texttt{binomial} entries.
+\url{https://pari.math.u-bordeaux.fr/dochtml/html/Vectors__matrices__linear_algebra_and_sets.html#matrix};
+\url{https://pari.math.u-bordeaux.fr/dochtml/html/Combinatorics.html#binomial}.
+\bibitem{tamvakis} H. Tamvakis, \emph{The theory of Schur polynomials
+revisited}, L'Enseignement Math\'ematique \textbf{58} (2012), 147--163,
+equations (1) and (3). \url{https://doi.org/10.4171/LEM/58-1-7}.
+\bibitem{odd} OEIS Foundation Inc., A057863, contributed by Eric W. Weisstein;
+A086205 cross-reference by Peter Bala (20 February 2023), revision 59.
+\url{https://oeis.org/A057863/internal}.
+\bibitem{dasasm} OEIS Foundation Inc., A266091, contributed by Michel Marcus
+(2015); product note by Peter Bala (19 February 2023), revision 29.
+\url{https://oeis.org/A266091/internal}.
+\bibitem{dlmf} NIST, \emph{Digital Library of Mathematical Functions},
+equations 4.36.1, 5.5.5, 5.11.1 and 5.17.1--5.17.7.
+\url{https://dlmf.nist.gov/4.36.E1}; \url{https://dlmf.nist.gov/5.17}.
+\bibitem{yutcis} A. A. Yutcis, \emph{Tournaments and generalized Young
+tableaux}, Mat. Zametki \textbf{27} (1980), 423--427 (Russian);
+Math. Notes \textbf{27} (1980), 209--211 (English).
+\url{https://www.mathnet.ru/eng/mzm6519}.
+\bibitem{stanley} R. P. Stanley, \emph{Enumerative Combinatorics}, vol.~2,
+Cambridge University Press (1999), Exercise 7.30(b), solution p.~505.
+\url{https://doi.org/10.1017/CBO9780511609589}.
+\bibitem{striker} J. Striker, \emph{The poset perspective on alternating
+sign matrices}, DMTCS Proceedings AK, FPSAC 2009, 813--824,
+Lemma 3.6, p.~820. \url{https://dmtcs.episciences.org/2707}.
+\bibitem{hooks} A. H. Morales, I. Pak and G. Panova,
+\emph{Hook formulas for skew shapes III. Multivariate and product formulas},
+Algebraic Combinatorics \textbf{2} (2019), 815--861, \S1.2, (HLF).
+\url{https://doi.org/10.5802/alco.67}.
+\bibitem{standard} OEIS Foundation Inc., A005118, tableau interpretation
+by Emeric Deutsch (17 July 2002), revision 50.
+\url{https://oeis.org/A005118/internal}.
+\bibitem{vw} A. P. Veselov and R. Willox,
+\emph{Burchnall--Chaundy polynomials and the Laurent phenomenon},
+arXiv:1407.7394v2 (25 December 2014), equation (1), pp.~1, 3.
+\url{https://arxiv.org/abs/1407.7394v2}.
+\bibitem{bfk} R. E. Behrend, I. Fischer and M. Konvalinka,
+\emph{Diagonally and antidiagonally symmetric alternating sign matrices
+of odd order}, Adv. Math. \textbf{315} (2017), 324--365;
+arXiv:1512.06030 (18 December 2015), v3 (31 July 2017),
+Corollary 5, equation (34). \url{https://arxiv.org/abs/1512.06030v3}.
+\end{thebibliography}
+\end{document}

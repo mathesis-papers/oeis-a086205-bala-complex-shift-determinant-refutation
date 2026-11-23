@@ -1,0 +1,238 @@
+{
+  "nodes": [
+    {
+      "attribution": null,
+      "authors": [
+        {
+          "affiliation": "ChronoAI Pte Ltd, Singapore",
+          "name": "Haobo Ma"
+        },
+        {
+          "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+          "name": "Wenlin Zhang"
+        }
+      ],
+      "claim": "s1",
+      "contributor": null,
+      "identity": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:2:s1",
+      "kind": "paper",
+      "label": "Theorem",
+      "lean_source": {
+        "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
+        "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
+      },
+      "lineage": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:s1",
+      "macros": {
+        "\\C": "\\mathbb C"
+      },
+      "next_step": "Existing Lean evidence is being checked before new proof work.",
+      "proof_basis": null,
+      "proof_state": "preparing",
+      "receipt": null,
+      "record": "oeis-a086205-bala-complex-shift-determinant-refutation",
+      "scope": "in_scope",
+      "statement": "For $n\\ge0$ and $x_1,\\ldots,x_n\\in\\C$,\n\\begin{equation}\n \\det_{1\\le i,j\\le n}\\binom{x_i}{j}\n =\\frac{\\prod_{i=1}^n x_i}{\\prod_{j=1}^n j!}\n   \\prod_{1\\le i<k\\le n}(x_k-x_i).\n\\end{equation}\nConsequently, for every $z\\in\\C$,\n\\begin{equation}\n D_n(z)=a_n\\prod_{i=1}^n\\left(1+\\frac{z}{i^2}\\right),\\qquad\n a_n=\\frac{\\prod_{i=1}^n i^2}{\\prod_{j=1}^n j!}\n             \\prod_{1\\le i<k\\le n}(k^2-i^2).\n\\end{equation}",
+      "status": "preparing",
+      "target_digest": null,
+      "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
+      "toolchain": null,
+      "version": 2,
+      "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
+    },
+    {
+      "attribution": null,
+      "authors": [
+        {
+          "affiliation": "ChronoAI Pte Ltd, Singapore",
+          "name": "Haobo Ma"
+        },
+        {
+          "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+          "name": "Wenlin Zhang"
+        }
+      ],
+      "claim": "s2",
+      "contributor": null,
+      "identity": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:2:s2",
+      "kind": "paper",
+      "label": "Corollary",
+      "lean_source": {
+        "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
+        "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
+      },
+      "lineage": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:s2",
+      "macros": {
+        "\\C": "\\mathbb C"
+      },
+      "next_step": "Existing Lean evidence is being checked before new proof work.",
+      "proof_basis": null,
+      "proof_state": "preparing",
+      "receipt": null,
+      "record": "oeis-a086205-bala-complex-shift-determinant-refutation",
+      "scope": "in_scope",
+      "statement": "Locally uniformly for $z\\in\\C$,\n\\[\n \\lim_{n\\to\\infty}\\frac{D_n(z)}{a_n}\n =F(z):=\\sum_{r=0}^{\\infty}\\frac{\\pi^{2r}z^r}{(2r+1)!}.\n\\]\nFor either square root of $z\\ne0$, $F(z)=\\sinh(\\pi\\sqrt z)/(\\pi\\sqrt z)$,\nand $F(0)=1$. On every disk $|z|\\le R$, the error is $O_R(1/n)$.",
+      "status": "preparing",
+      "target_digest": null,
+      "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
+      "toolchain": null,
+      "version": 2,
+      "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
+    },
+    {
+      "attribution": null,
+      "authors": [
+        {
+          "affiliation": "ChronoAI Pte Ltd, Singapore",
+          "name": "Haobo Ma"
+        },
+        {
+          "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+          "name": "Wenlin Zhang"
+        }
+      ],
+      "claim": "s3",
+      "contributor": null,
+      "identity": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:2:s3",
+      "kind": "paper",
+      "label": "Corollary",
+      "lean_source": {
+        "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
+        "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
+      },
+      "lineage": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:s3",
+      "macros": {
+        "\\C": "\\mathbb C"
+      },
+      "next_step": "Existing Lean evidence is being checked before new proof work.",
+      "proof_basis": null,
+      "proof_state": "preparing",
+      "receipt": null,
+      "record": "oeis-a086205-bala-complex-shift-determinant-refutation",
+      "scope": "in_scope",
+      "statement": "For $m\\ge0$ define $b_{-m-1}=(-1)^{\\lfloor(m+1)/2\\rfloor}b_m$.\nThen all three identities in Somos's A057863 block hold for every $n\\in\\mathbb Z$:\n\\begin{align*}\n b_n&=(-1)^{\\lfloor(n+1)/2\\rfloor}b_{-n-1},\\\\\n b_{n+1}b_{n-1}&=(2n+1)b_n^2,\\\\\n b_nb_{n+2}^3+b_{n+1}^3b_{n+3}&=(4n+8)b_{n+1}^2b_{n+2}^2.\n\\end{align*}",
+      "status": "preparing",
+      "target_digest": null,
+      "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
+      "toolchain": null,
+      "version": 2,
+      "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
+    },
+    {
+      "attribution": null,
+      "authors": [
+        {
+          "affiliation": "ChronoAI Pte Ltd, Singapore",
+          "name": "Haobo Ma"
+        },
+        {
+          "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+          "name": "Wenlin Zhang"
+        }
+      ],
+      "claim": "s4",
+      "contributor": null,
+      "identity": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:2:s4",
+      "kind": "paper",
+      "label": "Corollary",
+      "lean_source": {
+        "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
+        "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
+      },
+      "lineage": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:s4",
+      "macros": {
+        "\\C": "\\mathbb C"
+      },
+      "next_step": "Existing Lean evidence is being checked before new proof work.",
+      "proof_basis": null,
+      "proof_state": "preparing",
+      "receipt": null,
+      "record": "oeis-a086205-bala-complex-shift-determinant-refutation",
+      "scope": "in_scope",
+      "statement": "For $N=n(n+1)/2$, the hook product of $\\delta_n$ is $b_n$ and the number\nof its standard Young tableaux is $N!/b_n$. In the notation of A005118,\n$b_n=N!/\\mathrm{A005118}(n+1)$.",
+      "status": "preparing",
+      "target_digest": null,
+      "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
+      "toolchain": null,
+      "version": 2,
+      "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
+    },
+    {
+      "attribution": null,
+      "authors": [
+        {
+          "affiliation": "ChronoAI Pte Ltd, Singapore",
+          "name": "Haobo Ma"
+        },
+        {
+          "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+          "name": "Wenlin Zhang"
+        }
+      ],
+      "claim": "s5",
+      "contributor": null,
+      "identity": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:2:s5",
+      "kind": "paper",
+      "label": "Corollary",
+      "lean_source": {
+        "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
+        "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
+      },
+      "lineage": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:s5",
+      "macros": {
+        "\\C": "\\mathbb C"
+      },
+      "next_step": "Existing Lean evidence is being checked before new proof work.",
+      "proof_basis": null,
+      "proof_state": "preparing",
+      "receipt": null,
+      "record": "oeis-a086205-bala-complex-shift-determinant-refutation",
+      "scope": "in_scope",
+      "statement": "Let $G(1)=1$, $G(x+1)=\\Gamma(x)G(x)$ be the Barnes $G$-function,\nand let $A$ be the Glaisher--Kinkelin constant. For $n\\ge0$,\n\\[\nb_n=\\frac{\\sqrt{G(2n+2)}}{2^{n^2/2}G(n+1)\\sqrt{\\Gamma(n+1)}}.\n\\]\nThe equivalent half-integer formula recorded by Reshetnikov (6 November 2015) is\n\\[\n b_n=2^{n(n+1)/2-1/24}A^{3/2}\\pi^{-n/2-1/4}e^{-1/8}G(n+3/2).\n\\]\nAs $n\\to\\infty$,\n\\begin{align*}\n b_n&\\sim\\frac{A^{1/2}2^{n^2/2+n+5/24}\n n^{n^2/2+n/2+1/24}}{\\exp(3n^2/4+n/2+1/24)},\\\\\n a_n&\\sim\\frac{A^{1/2}2^{n^2+n/2+5/24}\n n^{n^2/2+n/2+1/24}}{\\exp(3n^2/4+n/2+1/24)}.\n\\end{align*}\nThese are the Barnes formula and asymptotics recorded by Kotesovec in\nA057863 (8 April 2021; 13 November 2014) and A086205 (11 July 2015).",
+      "status": "preparing",
+      "target_digest": null,
+      "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
+      "toolchain": null,
+      "version": 2,
+      "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
+    },
+    {
+      "attribution": null,
+      "authors": [
+        {
+          "affiliation": "ChronoAI Pte Ltd, Singapore",
+          "name": "Haobo Ma"
+        },
+        {
+          "affiliation": "National University of Singapore; ChronoAI Pte Ltd, Singapore",
+          "name": "Wenlin Zhang"
+        }
+      ],
+      "claim": "s6",
+      "contributor": null,
+      "identity": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:2:s6",
+      "kind": "paper",
+      "label": "Corollary",
+      "lean_source": {
+        "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
+        "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
+      },
+      "lineage": "collected:oeis-a086205-bala-complex-shift-determinant-refutation:s6",
+      "macros": {
+        "\\C": "\\mathbb C"
+      },
+      "next_step": "Existing Lean evidence is being checked before new proof work.",
+      "proof_basis": null,
+      "proof_state": "preparing",
+      "receipt": null,
+      "record": "oeis-a086205-bala-complex-shift-determinant-refutation",
+      "scope": "in_scope",
+      "statement": "For the Burchnall--Chaundy polynomials in the normalization of\nVeselov--Willox~\\cite[equation (1)]{vw}, the leading term is\n\\[\n P_n(z)=\\frac{z^{n(n+1)/2}}{b_n}+\n \\text{terms of lower degree}\\qquad(n\\ge0).\n\\]\nSomos's A057863 comment of 18 January 2023 asserts\n``leading term $z^{n^2+n}/a(n)$'', where its $a(n)$ is our $b_n$.\nThe exponent is replaced by $n(n+1)/2$ in the linked normalization.\nAlready $P_1=z+c_1$,\nas displayed by Veselov--Willox (2014), distinguishes the two exponents.",
+      "status": "preparing",
+      "target_digest": null,
+      "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
+      "toolchain": null,
+      "version": 2,
+      "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
+    }
+  ]
+}

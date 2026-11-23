@@ -1,0 +1,150 @@
+{
+  "status": "pass",
+  "arithmetic": "exact rational polynomial coefficients and integers",
+  "determinant_polynomial_range": [
+    0,
+    6
+  ],
+  "product_range": [
+    0,
+    12
+  ],
+  "recurrence_range": [
+    1,
+    12
+  ],
+  "tableau_enumeration": [
+    {
+      "n": 0,
+      "count": 1
+    },
+    {
+      "n": 1,
+      "count": 1
+    },
+    {
+      "n": 2,
+      "count": 2
+    },
+    {
+      "n": 3,
+      "count": 8
+    },
+    {
+      "n": 4,
+      "count": 64
+    },
+    {
+      "n": 5,
+      "count": 1024
+    }
+  ],
+  "signed_recurrence_range": [
+    -12,
+    12
+  ],
+  "hook_product_range": [
+    0,
+    12
+  ],
+  "Barnes_square_formula_range": [
+    0,
+    12
+  ],
+  "standard_tableau_enumeration": [
+    {
+      "n": 0,
+      "count": 1
+    },
+    {
+      "n": 1,
+      "count": 1
+    },
+    {
+      "n": 2,
+      "count": 2
+    },
+    {
+      "n": 3,
+      "count": 16
+    },
+    {
+      "n": 4,
+      "count": 768
+    },
+    {
+      "n": 5,
+      "count": 292864
+    }
+  ],
+  "Burchnall_Chaundy_monomial_range": [
+    0,
+    12
+  ],
+  "Burchnall_Chaundy_parameter_cases": 9,
+  "polynomials": [
+    {
+      "n": 0,
+      "D_n_coefficients": [
+        "1"
+      ]
+    },
+    {
+      "n": 1,
+      "D_n_coefficients": [
+        "1",
+        "1"
+      ]
+    },
+    {
+      "n": 2,
+      "D_n_coefficients": [
+        "6",
+        "15/2",
+        "3/2"
+      ]
+    },
+    {
+      "n": 3,
+      "D_n_coefficients": [
+        "360",
+        "490",
+        "140",
+        "10"
+      ]
+    },
+    {
+      "n": 4,
+      "D_n_coefficients": [
+        "302400",
+        "430500",
+        "143325",
+        "15750",
+        "525"
+      ]
+    },
+    {
+      "n": 5,
+      "D_n_coefficients": [
+        "4572288000",
+        "6692051520",
+        "2427440400",
+        "324822960",
+        "17463600",
+        "317520"
+      ]
+    },
+    {
+      "n": 6,
+      "D_n_coefficients": [
+        "1520925880320000",
+        "2268291958732800",
+        "869298330700800",
+        "130478658710400",
+        "8810456054400",
+        "266983516800",
+        "2933884800"
+      ]
+    }
+  ]
+}
