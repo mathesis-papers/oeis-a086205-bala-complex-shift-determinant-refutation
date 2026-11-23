@@ -28,9 +28,9 @@
         "name": "Wenlin Zhang"
       }
     ],
-    "concept_doi": null,
+    "concept_doi": "10.5281/zenodo.24407270",
     "current_version": 2,
-    "doi": null,
+    "doi": "10.5281/zenodo.24407271",
     "lean_source": {
       "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
       "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
