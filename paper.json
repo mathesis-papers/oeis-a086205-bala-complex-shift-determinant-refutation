@@ -31,6 +31,7 @@
     "concept_doi": "10.5281/zenodo.24407270",
     "current_version": 2,
     "doi": "10.5281/zenodo.24407271",
+    "kind": "note",
     "lean_source": {
       "revision": "d73267bacb7cde6604fdaee3818fa517d9ced843",
       "url": "https://github.com/the-omega-institute/trureturing/blob/d73267bacb7cde6604fdaee3818fa517d9ced843/D5/S0/Certificates/BalaComplexShiftDeterminantRefutation.lean"
@@ -55,10 +56,12 @@
     "title": "Complex-shift correction at OEIS A086205 (revision 35), Bala's formula block of 19 February 2023: an extension of Krattenthaler (1999)",
     "versions": [
       {
+        "changelog": null,
         "previous_version": null,
         "published_on": "2026-11-22T22:42:59.314276956Z",
         "revision": "2",
-        "version": 2
+        "version": 2,
+        "version_label": null
       }
     ],
     "work": "oeis-a086205-bala-complex-shift-determinant-refutation"
